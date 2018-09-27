@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:xsd1="its" xmlns:xsd2="Request" xmlns:soapbind="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12bind="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="its" name="Service" targetNamespace="its" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xs:schema xmlns:tns="Request" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="Request" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:complexType name="ArrayRequest">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="StrRequest" type="tns:StrRequest" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="StrRequest">
+        <xs:sequence>
+          <xs:element name="Konfig" type="xs:string" />
+          <xs:element name="Reliz" type="xs:string" />
+          <xs:element name="Platform" type="xs:string" />
+          <xs:element name="Address" type="xs:string" />
+          <xs:element name="User" type="xs:string" />
+          <xs:element name="Pass" type="xs:string" />
+          <xs:element name="Code" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs2="its" xmlns:xs1="Request" elementFormDefault="qualified" targetNamespace="its" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="Request" />
+      <xs:element name="GetRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Code" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetRequestResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="return" nillable="true" type="xs1:ArrayRequest" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="DownloadFile">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="WebPath" type="xs:string" />
+            <xs:element name="LocalPath" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="DownloadFileResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="return" nillable="true" type="xs:boolean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ReturnReliz">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Code" type="xs:string" />
+            <xs:element name="NVer" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ReturnRelizResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="return" nillable="true" type="xs:boolean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </types>
+  <message name="GetRequestRequestMessage">
+    <part name="parameters" element="tns:GetRequest" />
+  </message>
+  <message name="GetRequestResponseMessage">
+    <part name="parameters" element="tns:GetRequestResponse" />
+  </message>
+  <message name="DownloadFileRequestMessage">
+    <part name="parameters" element="tns:DownloadFile" />
+  </message>
+  <message name="DownloadFileResponseMessage">
+    <part name="parameters" element="tns:DownloadFileResponse" />
+  </message>
+  <message name="ReturnRelizRequestMessage">
+    <part name="parameters" element="tns:ReturnReliz" />
+  </message>
+  <message name="ReturnRelizResponseMessage">
+    <part name="parameters" element="tns:ReturnRelizResponse" />
+  </message>
+  <portType name="ServicePortType">
+    <operation name="GetRequest">
+      <input message="tns:GetRequestRequestMessage" />
+      <output message="tns:GetRequestResponseMessage" />
+    </operation>
+    <operation name="DownloadFile">
+      <input message="tns:DownloadFileRequestMessage" />
+      <output message="tns:DownloadFileResponseMessage" />
+    </operation>
+    <operation name="ReturnReliz">
+      <input message="tns:ReturnRelizRequestMessage" />
+      <output message="tns:ReturnRelizResponseMessage" />
+    </operation>
+  </portType>
+  <binding name="ServiceSoapBinding" type="tns:ServicePortType">
+    <soapbind:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="GetRequest">
+      <soapbind:operation soapAction="its#Service:GetRequest" style="document" />
+      <input>
+        <soapbind:body use="literal" />
+      </input>
+      <output>
+        <soapbind:body use="literal" />
+      </output>
+    </operation>
+    <operation name="DownloadFile">
+      <soapbind:operation soapAction="its#Service:DownloadFile" style="document" />
+      <input>
+        <soapbind:body use="literal" />
+      </input>
+      <output>
+        <soapbind:body use="literal" />
+      </output>
+    </operation>
+    <operation name="ReturnReliz">
+      <soapbind:operation soapAction="its#Service:ReturnReliz" style="document" />
+      <input>
+        <soapbind:body use="literal" />
+      </input>
+      <output>
+        <soapbind:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <binding name="ServiceSoap12Binding" type="tns:ServicePortType">
+    <soap12bind:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="GetRequest">
+      <soap12bind:operation soapAction="its#Service:GetRequest" style="document" />
+      <input>
+        <soap12bind:body use="literal" />
+      </input>
+      <output>
+        <soap12bind:body use="literal" />
+      </output>
+    </operation>
+    <operation name="DownloadFile">
+      <soap12bind:operation soapAction="its#Service:DownloadFile" style="document" />
+      <input>
+        <soap12bind:body use="literal" />
+      </input>
+      <output>
+        <soap12bind:body use="literal" />
+      </output>
+    </operation>
+    <operation name="ReturnReliz">
+      <soap12bind:operation soapAction="its#Service:ReturnReliz" style="document" />
+      <input>
+        <soap12bind:body use="literal" />
+      </input>
+      <output>
+        <soap12bind:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="Service">
+    <port name="ServiceSoap" binding="tns:ServiceSoapBinding">
+      <documentation>
+        <wsi:Claim xmlns:wsi="http://ws-i.org/schemas/conformanceClaim/" conformsTo="http://ws-i.org/profiles/basic/1.1" />
+      </documentation>
+      <soapbind:address location="http://95.68.247.214:8073/Test/ws/Service" />
+    </port>
+    <port name="ServiceSoap12" binding="tns:ServiceSoap12Binding">
+      <soap12bind:address location="http://95.68.247.214:8073/Test/ws/Service" />
+    </port>
+  </service>
+</definitions>
